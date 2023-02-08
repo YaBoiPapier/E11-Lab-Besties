@@ -88,4 +88,13 @@ while True:
     print("---------------------------------------")
     
 #while loop ends here
+data = [ts, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
+f = open("pmdata.csv", "w")
+meta_data = ["Time","PM10 Standard", "PM25 Standard", "PM100 Standard"]
+for entry in meta_data:
+    f.write(entry + ',')
+f.write('\n')
 
+for idata in data:
+    f.write(str(idata)+ ',')
+f.write('\n')
