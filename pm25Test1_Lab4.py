@@ -7,6 +7,7 @@ Example sketch to connect to PM2.5 sensor with either I2C or UART.
 
 # pylint: disable=unused-import
 import time
+import datetime
 import board
 import busio
 from digitalio import DigitalInOut, Direction, Pull
@@ -46,9 +47,12 @@ pm25 = PM25_UART(uart, reset_pin)
 # pm25 = PM25_I2C(i2c, reset_pin)
 
 print("Found PM2.5 sensor, reading data...")
+timeout = time.time() + 30 #30 seconds
 
 while True:
     time.sleep(1)
+    if time.time() > timeout:
+        break
 
     try:
         aqdata = pm25.read()
@@ -57,8 +61,11 @@ while True:
         print("Unable to read from sensor, retrying...")
         continue
     
-    ts = time.time()
-    print(ts)
+    ct = datetime.datetime.now()
+    ts = ct.timestamp()
+    
+    print("Current Time:-", ct)
+    print("Timestamp:-", ts)
     print("Concentration Units (standard)")
     print("---------------------------------------")
     print(
@@ -79,3 +86,6 @@ while True:
     print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
     print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
     print("---------------------------------------")
+    
+#while loop ends here
+
