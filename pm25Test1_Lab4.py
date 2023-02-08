@@ -56,8 +56,9 @@ while True:
     except RuntimeError:
         print("Unable to read from sensor, retrying...")
         continue
-
-    print()
+    
+    ts = time.time()
+    print(ts)
     print("Concentration Units (standard)")
     print("---------------------------------------")
     print(
