@@ -49,6 +49,13 @@ pm25 = PM25_UART(uart, reset_pin)
 print("Found PM2.5 sensor, reading data...")
 timeout = time.time() + 30 #30 seconds
 
+# writing csv file
+f = open("pmdata.csv", "w")
+meta_data = ["Time","PM10 Standard (mirogram/m^3)", "PM25 Standard (mirogram/m^3)", "PM100 Standard (mirogram/m^3)"]
+for entry in meta_data:
+    f.write(entry + ',')
+f.write('\n')
+
 while True:
     time.sleep(1)
     if time.time() > timeout:
@@ -63,7 +70,6 @@ while True:
     
     ct = datetime.datetime.now()
     ts = ct.timestamp()
-    
     print("Current Time:-", ct)
     print("Timestamp:-", ts)
     print("Concentration Units (standard)")
@@ -72,6 +78,12 @@ while True:
         "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
         % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"])
     )
+    # edit csv file during while loop
+    data = [ts, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
+    for idata in data:
+        f.write(str(idata)+ ',')
+    f.write('\n')
+    
     print("Concentration Units (environmental)")
     print("---------------------------------------")
     print(
@@ -88,15 +100,5 @@ while True:
     print("---------------------------------------")
     
 #while loop ends here
-data = [ts, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
-f = open("pmdata.csv", "w")
-meta_data = ["Time","PM10 Standard", "PM25 Standard", "PM100 Standard"]
-for entry in meta_data:
-    f.write(entry + ',')
-f.write('\n')
-
-for idata in data:
-    f.write(str(idata)+ ',')
-f.write('\n')
 f.close()
 print("Data saved to .csv file in directory")
