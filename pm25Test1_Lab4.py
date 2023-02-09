@@ -98,3 +98,5 @@ f.write('\n')
 for idata in data:
     f.write(str(idata)+ ',')
 f.write('\n')
+f.close()
+print("Data saved to .csv file in directory")
