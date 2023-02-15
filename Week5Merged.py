@@ -2,6 +2,7 @@ import adafruit_bme680
 import time
 import board
 import argparse
+import sys
 import datetime
 # Air quality sensor modules
 import busio
