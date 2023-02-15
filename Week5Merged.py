@@ -19,7 +19,7 @@ t_end = time.time() + 60 * 15
 while time.time() < t_end:
 	t = time.localtime()
 	current_time = time.strftime("%H:%M:%S", t)
-	print("\nTime: " + current_time + "- Temperature: %0.1f C | Gas: %d ohm | Humidity : %0.1f %% | Pressure: %0.3f hPa. | Altitude = %0.2f meters." % (bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude))
+	print("\nTime: " + current_time + "- Temperature: %0.1f C | Gas: %d ohm(s) | Humidity : %0.1f %% | Pressure: %0.3f hPa. | Altitude = %0.2f meters." % (bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude))
 	time.sleep(1)
   
 # Week 4 script
