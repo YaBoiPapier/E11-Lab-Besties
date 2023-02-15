@@ -38,49 +38,48 @@ run_time = int(sys.argv[1])
 itime = start_time
 
 while itime < (start_time + run_time):
-	# Weather sensor
-	itime = time.time()
-	t = time.localtime()
-	current_time = time.strftime("%H:%M:%S", t)
-	print("\nTime: " + current_time + "- Temperature: %0.1f C | Gas: %d ohm(s) | Humidity : %0.1f %% | Pressure: %0.3f hPa. | Altitude = %0.2f meters." % (bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude))
-	# Air quality sensor
-	try:
-        	aqdata = pm25.read()
-        # print(aqdata)
-    	except RuntimeError:
-        	print("Unable to read from sensor, retrying...")
-        	continue
+    # Weather sensor
+    itime = time.time()
+    t = time.localtime()
+    current_time = time.strftime("%H:%M:%S", t)
+    print("\nTime: " + current_time + "- Temperature: %0.1f C | Gas: %d ohm(s) | Humidity : %0.1f %% | Pressure: %0.3f hPa. | Altitude = %0.2f meters." % (bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude))
+    # Air quality sensor
+    try:
+	aqdata = pm25.read()
+    except RuntimeError:
+        print("Unable to read from sensor, retrying...")
+        continue
     
-    	ct = datetime.datetime.now()
-    	ts = ct.timestamp()
-   	print("Current Time:-", ct)
-   	print("Timestamp:-", ts)
-   	print("Concentration Units (standard)")
-    	print("---------------------------------------")
-    	print(
-            "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
-            % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"])
-    	)
+    ct = datetime.datetime.now()
+    ts = ct.timestamp()
+    print("Current Time:-", ct)
+    print("Timestamp:-", ts)
+    print("Concentration Units (standard)")
+    print("---------------------------------------")
+    print(
+        "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
+         % (aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"])
+    )
     # edit csv file during while loop
-    	data = [itime, bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
-   	for idata in data:
-        	f.write(str(idata)+ ',')
-    	f.write('\n')
+    data = [itime, bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
+    for idata in data:
+        f.write(str(idata)+ ',')
+    f.write('\n')
     
-    	print("Concentration Units (environmental)")
-    	print("---------------------------------------")
-    	print(
-           "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
-           % (aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"])
-    	)
-    	print("---------------------------------------")
-   	print("Particles > 0.3um / 0.1L air:", aqdata["particles 03um"])
-    	print("Particles > 0.5um / 0.1L air:", aqdata["particles 05um"])
-    	print("Particles > 1.0um / 0.1L air:", aqdata["particles 10um"])
-    	print("Particles > 2.5um / 0.1L air:", aqdata["particles 25um"])
-    	print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
-    	print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
-    	print("---------------------------------------")
-	time.sleep(1)
+    print("Concentration Units (environmental)")
+    print("---------------------------------------")
+    print(
+        "PM 1.0: %d\tPM2.5: %d\tPM10: %d"
+         % (aqdata["pm10 env"], aqdata["pm25 env"], aqdata["pm100 env"])
+    )
+    print("---------------------------------------")
+    print("Particles > 0.3um / 0.1L air:", aqdata["particles 03um"])
+    print("Particles > 0.5um / 0.1L air:", aqdata["particles 05um"])
+    print("Particles > 1.0um / 0.1L air:", aqdata["particles 10um"])
+    print("Particles > 2.5um / 0.1L air:", aqdata["particles 25um"])
+    print("Particles > 5.0um / 0.1L air:", aqdata["particles 50um"])
+    print("Particles > 10 um / 0.1L air:", aqdata["particles 100um"])
+    print("---------------------------------------")
+    time.sleep(1)
 f.close()
 print("Data saved to .csv file in directory")
