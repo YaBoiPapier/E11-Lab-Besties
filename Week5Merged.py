@@ -65,7 +65,7 @@ while itime < (start_time + run_time):
     	data = [itime, bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude, aqdata["pm10 standard"], aqdata["pm25 standard"], aqdata["pm100 standard"]]
    	for idata in data:
         	f.write(str(idata)+ ',')
-    		f.write('\n')
+    	f.write('\n')
     
     	print("Concentration Units (environmental)")
     	print("---------------------------------------")
