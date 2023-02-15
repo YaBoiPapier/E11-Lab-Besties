@@ -10,7 +10,7 @@ run_time = int(sys.argv[1])
 itime = start_time
 
 
-while True:
+while itime < (start_time + run_time):
   itime = time.time()
   idata = random.random()
   print(itime, idata)
