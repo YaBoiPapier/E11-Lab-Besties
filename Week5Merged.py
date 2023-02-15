@@ -45,7 +45,7 @@ while itime < (start_time + run_time):
     print("\nTime: " + current_time + "- Temperature: %0.1f C | Gas: %d ohm(s) | Humidity : %0.1f %% | Pressure: %0.3f hPa. | Altitude = %0.2f meters." % (bme680.temperature, bme680.gas, bme680.relative_humidity, bme680.pressure, bme680.altitude))
     # Air quality sensor
     try:
-	aqdata = pm25.read()
+        aqdata = pm25.read()
     except RuntimeError:
         print("Unable to read from sensor, retrying...")
         continue
