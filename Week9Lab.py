@@ -31,7 +31,7 @@ try:
     
     print("Number of counts in last", exec_time, "seconds:", count)
 
-    except KeyboardInterrupt:
+except KeyboardInterrupt:
         GPIO.cleanup()
       
 print("Goodbye World!")
