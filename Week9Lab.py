@@ -15,13 +15,15 @@ def pulse_counter(channel):
    
     print("Count increase detected at:", time.time())
 
+#user input runtime
+exec_time = int(input("Enter execution time in seconds: "))
+filename = input("File name: ")
+
 #execute callback
 GPIO.add_event_detect(23, GPIO.FALLING, callback=pulse_counter)
 
-#user input runtime
-exec_time = int(input("Enter execution time in seconds: "))
 
-f = open("pmdata.csv", "w")
+f = open(filename + ".csv", "w")
 meta_data = ["Time","Counts per minute"]
 for entry in meta_data:
     f.write(entry + ',')
