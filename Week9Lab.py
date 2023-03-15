@@ -35,6 +35,11 @@ try:
     while time.monotonic() < end_time:
         time.sleep(1)
     
+        if time.monotonic() - start_time >= 60:
+            print("Number of counts in last minute:", count)
+            count = 0
+            start_time = time.monotonic()
+    
     print("Number of counts in last", exec_time, "seconds:", count)
 
 except KeyboardInterrupt:
