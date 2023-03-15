@@ -21,6 +21,12 @@ GPIO.add_event_detect(23, GPIO.FALLING, callback=pulse_counter)
 #user input runtime
 exec_time = int(input("Enter execution time in seconds: "))
 
+f = open("pmdata.csv", "w")
+meta_data = ["Time","Counts per minute"]
+for entry in meta_data:
+    f.write(entry + ',')
+f.write('\n')
+
 try:
     count = 0
     start_time = time.monotonic()
