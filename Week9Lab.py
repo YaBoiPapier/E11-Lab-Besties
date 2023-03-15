@@ -18,11 +18,19 @@ def pulse_counter(channel):
 #execute callback
 GPIO.add_event_detect(23, GPIO.FALLING, callback=pulse_counter)
 
-while True:
-    try:
-        count = 0
-        time.sleep(60)
-        print("Number of counts in last minute:", count)
+#user input runtime
+exec_time = int(input("Enter execution time in seconds: "))
+
+try:
+    count = 0
+    start_time = time.monotonic()
+    end_time = start_time + exec_time
+
+    while time.monotonic() < end_time:
+        time.sleep(1)
+    
+    print("Number of counts in last", exec_time, "seconds:", count)
+
     except KeyboardInterrupt:
         GPIO.cleanup()
       
