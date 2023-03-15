@@ -22,7 +22,6 @@ while True:
         count = 0
         time.sleep(60)
         print("Number of counts in last minute:", count)
-        message = raw_input('\nPress any key to exit:\n')
     except KeyboardInterrupt:
         GPIO.cleanup()
       
