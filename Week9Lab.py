@@ -12,7 +12,8 @@ GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 def pulse_counter(channel):
     global count
     count+= 1
-    print(time.time())
+   
+    print("Count increase detected at:", time.time())
 
 #execute callback
 GPIO.add_event_detect(23, GPIO.FALLING, callback=pulse_counter)
