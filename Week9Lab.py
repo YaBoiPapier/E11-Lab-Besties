@@ -37,12 +37,12 @@ try:
     
         if time.monotonic() - start_time >= 60:
             print("Number of counts in last minute:", count)
+            data = [time.time(), count]
             for idata in data:
                 f.write(str(idata)+ ',')
             f.write('\n')
             count = 0
             start_time = time.monotonic()
-            data = [time.time(), count]
 
 except KeyboardInterrupt:
         GPIO.cleanup()
