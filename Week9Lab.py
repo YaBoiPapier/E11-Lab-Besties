@@ -37,7 +37,7 @@ try:
     while time.monotonic() < end_time:
         time.sleep(1)
     
-        if time.monotonic() - start_time >= 60:
+        if time.monotonic() - start_time >= 10:
             print("Number of counts in last minute:", count)
             data = [time.time(), count]
             for idata in data:
