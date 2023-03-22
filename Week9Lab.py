@@ -49,4 +49,4 @@ try:
 except KeyboardInterrupt:
         GPIO.cleanup()
 f.close()
-print("Goodbye World!")
+print("File saved to directory")
