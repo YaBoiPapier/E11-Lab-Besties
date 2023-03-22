@@ -38,7 +38,7 @@ try:
         time.sleep(1)
     
         if time.monotonic() - start_time >= 10:
-            print("Number of counts in last minute:", count)
+            print("Number of counts in last 10 seconds:", count)
             data = [time.time(), count]
             for idata in data:
                 f.write(str(idata)+ ',')
